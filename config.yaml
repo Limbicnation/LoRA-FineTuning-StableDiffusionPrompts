@@ -1,0 +1,26 @@
+model_name: "teknium/OpenHermes-2.5-Mistral-7B"
+new_model: "PromptMaster-2.5-Mistral-7B"
+dataset_name: "Gustavosta/Stable-Diffusion-Prompts"
+wandb_project: "lora_finetuning"
+wandb_entity: "limbicnation"  # Replace with your actual WandB entity
+
+training_args:
+  per_device_train_batch_size: 4
+  gradient_accumulation_steps: 4
+  gradient_checkpointing: true
+  learning_rate: 5e-5
+  lr_scheduler_type: "cosine"
+  max_steps: 200
+  save_strategy: "no"
+  logging_steps: 1
+  output_dir: "PromptMaster-2.5-Mistral-7B"
+  optim: "paged_adamw_32bit"
+  warmup_steps: 100
+  bf16: true
+  report_to: "wandb"
+
+dpo_config:
+  output_dir: "PromptMaster-2.5-Mistral-7B"
+  beta: 0.1
+  max_prompt_length: 1024
+  max_length: 1536
